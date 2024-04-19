@@ -99,6 +99,7 @@
         // Pārliecināties, ka DOM ir ielādēts
         document.addEventListener("DOMContentLoaded", function() {
             const startButton = document.getElementById('start-btn');
+            const restartButton = document.getElementById('restart-btn');
             const startContainer = document.querySelector('.start-container');
             const gameContainer = document.getElementById('game-container');
 
@@ -106,6 +107,12 @@
             startButton.addEventListener('click', function() {
                 startContainer.style.display = 'none'; // Paslēpj sākuma ekrānu
                 gameContainer.style.display = 'block'; // Parāda spēles konteineru
+            });
+
+            // Pievienot notikumu klausītāju pogai "Restart"
+            restartButton.addEventListener('click', function() {
+                startContainer.style.display = 'block'; // Parāda sākuma ekrānu
+                gameContainer.style.display = 'none'; // Paslēpj spēles konteineru
             });
         });
     </script>
