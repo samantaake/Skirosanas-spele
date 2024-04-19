@@ -1,29 +1,26 @@
 // Define trash items
 const trashItems = [
-    "Bio",
-    "Pārtikas atliekas",
-    "Kafijas vai tējas biezumi",
-    "Tējas maisiņi",
-    "Dārza atkritumi",
-    "Papīra dvieļi un salvetes",
-    "Stikls",
-    "Vīna pudeles",
-    "Alus pudeles",
-    "Stikla burkas",
-    "Smaržu pudeles",
-    "Dzeramās glāzes",
-    "Plastmasa",
-    "Ūdens pudeles",
-    "Dzērienu pudeles",
-    "Veļas mazgāšanas līdzekļu un ziepju pudeles",
-    "Plastmasas maisiņi",
-    "Plastmasas iepakojums",
-    "Papīrs",
-    "Laikraksti",
-    "Žurnāli",
-    "Biroja papīrs",
-    "Kartona kastes",
-    "Aploksnes"
+    { name: "Vīna pudeles", category: "Stikls" },
+    { name: "Pārtikas atliekas", category: "Organiskie atkritumi" },
+    { name: "Kafijas vai tējas biezumi", category: "Organiskie atkritumi" },
+    { name: "Dzeramās glāzes", category: "Stikls" },
+    { name: "Smaržu pudeles", category: "Stikls" },
+    { name: "Marinēto gurķu burka", category: "Stikls" },
+    { name: "Alus pudeles", category: "Stikls" },
+    { name: "Dārza atkritumi", category: "Organiskie atkritumi" },
+    { name: "Pārtikas mizas", category: "Organiskie atkritumi" },
+    { name: "Tējas maisiņi", category: "Organiskie atkritumi" },
+    { name: "Papīra dvieļi un salvetes", category: "Organiskie atkritumi" },
+    { name: "Ūdens pudeles", category: "Plastmasa" },
+    { name: "Dzērienu pudeles", category: "Plastmasa" },
+    { name: "Veļas mazgāšanas līdzekļu un ziepju pudeles", category: "Plastmasa" },
+    { name: "Plastmasas maisiņi", category: "Plastmasa" },
+    { name: "Plastmasas iepakojums", category: "Plastmasa" },
+    { name: "Laikraksti", category: "Papīrs" },
+    { name: "Žurnāli", category: "Papīrs" },
+    { name: "Biroja papīrs", category: "Papīrs" },
+    { name: "Kartona kastes", category: "Papīrs" },
+    { name: "Aploksnes", category: "Papīrs" }
 ];
 
 // Select elements
@@ -32,6 +29,7 @@ const trashElement = document.getElementById('trash');
 const scoreElement = document.getElementById('score-value');
 const highscoreElement = document.getElementById('highscore-value');
 const restartBtn = document.getElementById('restart-btn');
+const messageElement = document.getElementById('message');
 
 let score = 0;
 let highscore = 0;
@@ -53,15 +51,15 @@ function generateTrash() {
         return;
     }
     const randomIndex = Math.floor(Math.random() * trashItems.length);
-    const trashType = trashItems[randomIndex];
+    const trashItem = trashItems[randomIndex];
     
-    // Create new trash element with image
+    // Create new trash element
     const newTrashElement = document.createElement('div');
     newTrashElement.className = 'trash';
-    const trashImage = document.createElement('img');
-    trashImage.src = trashType.toLowerCase().replace(/ /g, '-') + '.jpg';
-    trashImage.alt = trashType;
-    newTrashElement.appendChild(trashImage);
+    newTrashElement.textContent = trashItem.name;
+    newTrashElement.dataset.category = trashItem.category; // Add category as dataset attribute
+    newTrashElement.draggable = true;
+    newTrashElement.addEventListener('dragstart', dragStart);
 
     // Replace old trash element with new one
     trashElement.innerHTML = '';
@@ -70,7 +68,8 @@ function generateTrash() {
 
 // Drag start event listener
 function dragStart(event) {
-    event.dataTransfer.setData('text', event.target.textContent);
+    event.dataTransfer.setData('text/plain', event.target.textContent);
+    event.dataTransfer.setData('category', event.target.dataset.category); // Add category to data transfer
 }
 
 // Add event listeners to trash bins
@@ -87,9 +86,12 @@ function dragOver(event) {
 // Drop event listener
 function drop(event) {
     event.preventDefault();
-    const trashType = event.dataTransfer.getData('text');
-    const binType = this.textContent;
-    if (trashType === binType) {
+    const trashName = event.dataTransfer.getData('text/plain');
+    const trashCategory = event.dataTransfer.getData('category');
+    const binCategory = this.id; // Get the ID of the trash bin
+
+    // Check if the dragged trash item's category matches the bin category
+    if (trashCategory === binCategory) {
         score++;
         scoreElement.textContent = score;
         remainingItems--;
@@ -97,9 +99,12 @@ function drop(event) {
             highscore = score;
             highscoreElement.textContent = highscore;
         }
+    } else {
+        showMessage('Nepareizs konteiners!');
     }
     generateTrash();
 }
+
 
 // Function to end the game
 function endGame() {
@@ -116,4 +121,12 @@ function restartGame() {
     scoreElement.textContent = score;
     remainingItems = 20;
     generateTrash();
+}
+
+// Function to show message
+function showMessage(msg) {
+    messageElement.textContent = msg;
+    setTimeout(() => {
+        messageElement.textContent = '';
+    }, 5000); // Remove message after 2 seconds
 }
