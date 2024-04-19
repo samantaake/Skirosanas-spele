@@ -1,9 +1,30 @@
-function startGame() {
-    window.location.href = "index2.html";
-}
-
 // Define trash items
-const trashItems = ["paper", "plastic", "organic", "glass"];
+const trashItems = [
+    "Bio",
+    "Pārtikas atliekas",
+    "Kafijas vai tējas biezumi",
+    "Tējas maisiņi",
+    "Dārza atkritumi",
+    "Papīra dvieļi un salvetes",
+    "Stikls",
+    "Vīna pudeles",
+    "Alus pudeles",
+    "Stikla burkas",
+    "Smaržu pudeles",
+    "Dzeramās glāzes",
+    "Plastmasa",
+    "Ūdens pudeles",
+    "Dzērienu pudeles",
+    "Veļas mazgāšanas līdzekļu un ziepju pudeles",
+    "Plastmasas maisiņi",
+    "Plastmasas iepakojums",
+    "Papīrs",
+    "Laikraksti",
+    "Žurnāli",
+    "Biroja papīrs",
+    "Kartona kastes",
+    "Aploksnes"
+];
 
 // Select elements
 const trashBinElements = document.querySelectorAll('.trash-bin');
@@ -14,6 +35,7 @@ const restartBtn = document.getElementById('restart-btn');
 
 let score = 0;
 let highscore = 0;
+let remainingItems = 20; // Number of items to be dragged
 
 // Initialize game
 initializeGame();
@@ -26,17 +48,29 @@ function initializeGame() {
 
 // Function to generate trash
 function generateTrash() {
+    if (remainingItems === 0) {
+        endGame();
+        return;
+    }
     const randomIndex = Math.floor(Math.random() * trashItems.length);
     const trashType = trashItems[randomIndex];
-    trashElement.className = '';
-    trashElement.classList.add(trashType);
-    trashElement.draggable = true;
-    trashElement.addEventListener('dragstart', dragStart);
+    
+    // Create new trash element with image
+    const newTrashElement = document.createElement('div');
+    newTrashElement.className = 'trash';
+    const trashImage = document.createElement('img');
+    trashImage.src = trashType.toLowerCase().replace(/ /g, '-') + '.jpg';
+    trashImage.alt = trashType;
+    newTrashElement.appendChild(trashImage);
+
+    // Replace old trash element with new one
+    trashElement.innerHTML = '';
+    trashElement.appendChild(newTrashElement);
 }
 
 // Drag start event listener
 function dragStart(event) {
-    event.dataTransfer.setData('text', event.target.className);
+    event.dataTransfer.setData('text', event.target.textContent);
 }
 
 // Add event listeners to trash bins
@@ -54,25 +88,25 @@ function dragOver(event) {
 function drop(event) {
     event.preventDefault();
     const trashType = event.dataTransfer.getData('text');
-    const binType = this.id.split('-')[0];
+    const binType = this.textContent;
     if (trashType === binType) {
         score++;
         scoreElement.textContent = score;
+        remainingItems--;
         if (score > highscore) {
             highscore = score;
             highscoreElement.textContent = highscore;
         }
-        generateTrash();
-    } else {
-        endGame();
     }
+    generateTrash();
 }
 
 // Function to end the game
 function endGame() {
-    alert('Game over! Your score: ' + score);
+    alert('Spēle beigusies! Jūsu rezultāts: ' + score);
     score = 0;
     scoreElement.textContent = score;
+    remainingItems = 20;
     generateTrash();
 }
 
@@ -80,5 +114,6 @@ function endGame() {
 function restartGame() {
     score = 0;
     scoreElement.textContent = score;
+    remainingItems = 20;
     generateTrash();
 }
