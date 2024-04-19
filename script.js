@@ -1,3 +1,7 @@
+function startGame() {
+    window.location.href = "index2.html";
+}
+
 // Define trash items
 const trashItems = ["paper", "plastic", "organic", "glass"];
 
