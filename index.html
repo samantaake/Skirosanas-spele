@@ -44,31 +44,33 @@
     <button id="start-btn">Sākt spēli</button>
 </div>
 <div id="game-container" class="text-center">
-<h1>Šķirošanas spēle</h1>
-<div class="d-flex justify-content-between">
-    <div class="d-flex flex-column">
-        <div class="trash-bin" id="paper-bin">
-            <img src="papirs.jpg" alt="Papīrs" width="250" height="250">
-        </div>
-        <div class="trash-bin" id="plastic-bin">
-            <img src="plastmasas.jpg" alt="Plastmasa"  width="250" height="250">
-        </div>
-    </div>
-    <div class="d-flex flex-column">
-        <div class="trash-bin" id="organic-bin">
-            <img src="organiskie.jpg" alt="Organiskie atkritumi"  width="250" height="250">
-        </div>
-        <div class="trash-bin" id="glass-bin">
-            <img src="stikls.jpg" alt="Stikls" width="250" height="250">
-        </div>
-    </div>
+  <h1>Šķirošanas spēle</h1>
+  <div class="d-flex justify-content-between">
+      <div class="d-flex flex-column">
+          <div class="trash-bin" id="paper-bin">
+              <img src="papirs.jpg" alt="Papīrs" width="250" height="250">
+          </div>
+          <div class="trash-bin" id="plastic-bin">
+              <img src="plastmasas.jpg" alt="Plastmasa"  width="250" height="250">
+          </div>
+      </div>
+      <div class="d-flex flex-column">
+          <div class="trash-bin" id="organic-bin">
+              <img src="organiskie.jpg" alt="Organiskie atkritumi"  width="250" height="250">
+          </div>
+          <div class="trash-bin" id="glass-bin">
+              <img src="stikls.jpg" alt="Stikls" width="250" height="250">
+          </div>
+      </div>
+  </div>
+
+  <div id="trash" class="mb-3"></div>
+  <div id="score">Rezultāts: <span id="score-value">0</span></div>
+  <div id="highscore">Labākais rezultāts: <span id="highscore-value">0</span></div>
+  <button id="restart-btn" class="btn btn-primary mt-3">Atsākt</button>
+  <div id="message"></div> <!-- Jaunu div elementu pievienojam ziņu par nepareizo izmeti -->
 </div>
 
-    <div id="trash" class="mb-3"></div>
-    <div id="score">Rezultāts: <span id="score-value">0</span></div>
-    <div id="highscore">Labākais rezultāts: <span id="highscore-value">0</span></div>
-    <button id="restart-btn" class="btn btn-primary mt-3">Atsākt</button>
-</div>
 </div>
 <script src="script.js"></script>
 <script>
