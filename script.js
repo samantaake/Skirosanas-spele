@@ -23,7 +23,7 @@ const trashItems = [
     { name: "Aploksnes", category: "Papīrs" }
 ];
 
-// Select elements
+// Izvēlas HTML elementus
 const trashBinElements = document.querySelectorAll('.trash-bin');
 const trashElement = document.getElementById('trash');
 const scoreElement = document.getElementById('score-value');
@@ -33,18 +33,18 @@ const messageElement = document.getElementById('message');
 
 let score = 0;
 let highscore = 0;
-let remainingItems = 20; // Number of items to be dragged
+let remainingItems = 20; // Kopējais atkritumu skaits
 
-// Initialize game
+// Inicializē spēli
 initializeGame();
 
-// Function to initialize game
+// Funkcija, lai inicializētu spēli
 function initializeGame() {
     generateTrash();
     restartBtn.addEventListener('click', restartGame);
 }
 
-// Function to generate trash
+// Funkcija, lai izveidotu atkritumus
 function generateTrash() {
     if (remainingItems === 0) {
         endGame();
@@ -53,44 +53,43 @@ function generateTrash() {
     const randomIndex = Math.floor(Math.random() * trashItems.length);
     const trashItem = trashItems[randomIndex];
     
-    // Create new trash element
+    // Izveido jaunu atkritumu elementu
     const newTrashElement = document.createElement('div');
     newTrashElement.className = 'trash';
     newTrashElement.textContent = trashItem.name;
-    newTrashElement.dataset.category = trashItem.category; // Add category as dataset attribute
+    newTrashElement.dataset.category = trashItem.category; // Pievieno kategoriju kā dataset atribūtu
     newTrashElement.draggable = true;
     newTrashElement.addEventListener('dragstart', dragStart);
 
-    // Replace old trash element with new one
+    // Aizstāj veco atkritumu elementu ar jauno
     trashElement.innerHTML = '';
     trashElement.appendChild(newTrashElement);
 }
 
-// Drag start event listener
+// Notikums, kad sākas vilkšana
 function dragStart(event) {
     event.dataTransfer.setData('text/plain', event.target.textContent);
-    event.dataTransfer.setData('category', event.target.dataset.category); // Add category to data transfer
+    event.dataTransfer.setData('category', event.target.dataset.category); // Pievieno kategoriju pārnešanas datiem
 }
 
-// Add event listeners to trash bins
+// Pievieno notikumu klausītājus atkritumu konteineriem
 trashBinElements.forEach(bin => {
     bin.addEventListener('dragover', dragOver);
     bin.addEventListener('drop', drop);
 });
 
-// Drag over event listener
+// Notikums, kad pārvilkts pār konteineri
 function dragOver(event) {
     event.preventDefault();
 }
 
-// Drop event listener
+// Notikums, kad pārvilkts uz konteineri
 function drop(event) {
     event.preventDefault();
-    const trashName = event.dataTransfer.getData('text/plain');
     const trashCategory = event.dataTransfer.getData('category');
-    const binCategory = this.id; // Get the ID of the trash bin
+    const binCategory = this.dataset.category; // Iegūst konteinerī esošo atkritumu kategoriju
 
-    // Check if the dragged trash item's category matches the bin category
+    // Pārbauda, vai pārvilktā atkrituma kategorija atbilst konteinerī esošajai kategorijai
     if (trashCategory === binCategory) {
         score++;
         scoreElement.textContent = score;
@@ -105,8 +104,7 @@ function drop(event) {
     generateTrash();
 }
 
-
-// Function to end the game
+// Funkcija, lai beigtu spēli
 function endGame() {
     alert('Spēle beigusies! Jūsu rezultāts: ' + score);
     score = 0;
@@ -115,7 +113,7 @@ function endGame() {
     generateTrash();
 }
 
-// Function to restart the game
+// Funkcija, lai restartētu spēli
 function restartGame() {
     score = 0;
     scoreElement.textContent = score;
@@ -123,10 +121,10 @@ function restartGame() {
     generateTrash();
 }
 
-// Function to show message
+// Funkcija, lai rādītu ziņojumu
 function showMessage(msg) {
     messageElement.textContent = msg;
     setTimeout(() => {
         messageElement.textContent = '';
-    }, 5000); // Remove message after 2 seconds
+    }, 5000); // Noņem ziņojumu pēc 5 sekundēm
 }
