@@ -107,6 +107,7 @@ const trashItems = [
   },
 ];
 
+
 // Izvēlas HTML elementus
 const trashBinElements = document.querySelectorAll(".trash-bin");
 const trashElement = document.getElementById("trash");
@@ -114,28 +115,30 @@ const scoreElement = document.getElementById("score-value");
 const highscoreElement = document.getElementById("highscore-value");
 const restartBtn = document.getElementById("restart-btn");
 const messageElement = document.getElementById("message");
+const statsElement = document.getElementById("game-stats");
 
 let score = 0;
 let highscore = getHighscore();
 let remainingItems = 20; // Kopējais atkritumu skaits
+let errors = 0; // Pievienojiet kļūdu skaita mainīgo
 
 // Inicializē spēli
 initializeGame();
 
 // Saglabāt highscore
 function saveHighscore() {
-    localStorage.setItem('highscore', highscore);
+  localStorage.setItem("highscore", highscore);
 }
 
 // Iegūt highscore no localStorage
 function getHighscore() {
-    const storedHighscore = localStorage.getItem('highscore');
-    return storedHighscore ? parseInt(storedHighscore) : 0; // Parbaudam, vai ir saglabāts rezultāts
+  const storedHighscore = localStorage.getItem("highscore");
+  return storedHighscore ? parseInt(storedHighscore) : 0; // Parbaudam, vai ir saglabāts rezultāts
 }
 
 // Atjaunot highscore elementu spēles interfeisā
 function updateHighscoreElement() {
-    highscoreElement.textContent = highscore;
+  highscoreElement.textContent = highscore;
 }
 
 // Funkcija, lai inicializētu spēli
@@ -183,7 +186,10 @@ function generateTrash() {
 // Notikums, kad sākas vilkšana
 function dragStart(event) {
   event.dataTransfer.setData("trash-name", event.target.textContent);
-  event.dataTransfer.setData("trash-category", event.target.dataset.category); // Pievieno kategoriju pārnešanas datiem
+  event.dataTransfer.setData(
+    "trash-category",
+    event.target.dataset.category
+  ); // Pievieno kategoriju pārnešanas datiem
 }
 
 // Pievieno notikumu klausītājus atkritumu konteineriem
@@ -215,18 +221,21 @@ function drop(event) {
       updateHighscoreElement(); // Atjaunina highscore interfeisā
     }
   } else {
-    showMessage("Nepareizs konteiners!");
+    errors++; // Pievienojiet kļūdu skaita palielināšanu
+    if (errors >= 3) {
+      endGame(); // Ja kļūdu skaits pārsniedz 3, izsauciet funkciju, lai beigtu spēli
+      return;
+    }
   }
   generateTrash();
 }
 
 // Funkcija, lai beigtu spēli
 function endGame() {
-  alert("Spēle beigusies! Jūsu rezultāts: " + score);
-  score = 0;
-  scoreElement.textContent = score;
-  remainingItems = 20;
-  generateTrash();
+  trashElement.innerHTML = "";
+  const stats = `Spēle beigusies! Jūsu rezultāts: ${score}, Highscore: ${highscore}`;
+  statsElement.textContent = stats;
+  restartBtn.style.display = "block"; // Parāda restart pogu
 }
 
 // Funkcija, lai restartētu spēli
@@ -234,18 +243,13 @@ function restartGame() {
   score = 0;
   scoreElement.textContent = score;
   remainingItems = 20;
+  errors = 0;
   generateTrash();
-}
-
-// Funkcija, lai rādītu ziņojumu
-function showMessage(msg) {
-  messageElement.textContent = msg;
-  setTimeout(() => {
-    messageElement.textContent = "";
-  }, 5000); // Noņem ziņojumu pēc 5 sekundēm
+  statsElement.textContent = "";
+  restartBtn.style.display = "none"; // Paslēpj restart pogu
 }
 
 // Ielādē highscore, kad dokumenta DOM ir ielādēts
-document.addEventListener('DOMContentLoaded', function() {
-    updateHighscoreElement();
+document.addEventListener("DOMContentLoaded", function () {
+  updateHighscoreElement();
 });
