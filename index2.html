@@ -14,34 +14,38 @@
 
 </head>
 <body>
-<div class="container">
-    <div id="game-container" class="text-center">
+    <div class="start-container">
         <h1>Šķirošanas spēle</h1>
-        <div class="d-flex justify-content-center align-items-center flex-wrap">
-            <div class="trash-bin m-3" id="paper-bin">
-                <img src="papirs.jpg" alt="Papīrs" width="150" height="150">
-            </div>
-            <div class="trash-bin m-3" id="plastic-bin">
-                <img src="plastmasas.jpg" alt="Plastmasa"  width="150" height="150">
-            </div>
-            <div class="trash-bin m-3" id="organic-bin">
-                <img src="organiskie.jpg" alt="Organiskie atkritumi"  width="150" height="150">
-            </div>
-            <div class="trash-bin m-3" id="glass-bin">
-                <img src="stikls.jpg" alt="Stikls" width="150" height="150">
-            </div>
-        </div>
-        <!-- Trash element will be inserted here -->
-        <div id="trash" class="d-flex justify-content-center align-items-center mb-3 flex-wrap"></div>
-        <div id="score">Rezultāts: <span id="score-value">0</span></div>
-        <div id="highscore">Labākais rezultāts: <span id="highscore-value">0</span></div>
-        <button id="restart-btn" class="btn btn-primary mt-3">Atsākt</button>
-        <div id="game-stats"></div> <!-- Jaunu div elementu pievienojam ziņu par nepareizo izmeti -->
+        <button id="start-btn">Sākt spēli</button>
     </div>
-    <div class="start-container text-center mt-5">
-        <button id="start-btn" class="btn btn-primary btn-lg">Sākt spēli</button>
-    </div>
-</div>
+    <div id="game-container" class="text-center">
+      <h1>Šķirošanas spēle</h1>
+      <div class="d-flex justify-content-between">
+          <div class="d-flex flex-column">
+              <div class="trash-bin" id="paper-bin">
+                  <img src="papirs.jpg" alt="Papīrs" width="200" height="200">
+              </div>
+              <div class="trash-bin-spacer"></div>
+              <div class="trash-bin" id="plastic-bin">
+                  <img src="plastmasas.jpg" alt="Plastmasa"  width="200" height="200">
+              </div>
+          </div>
+          <div class="d-flex flex-column">
+            <div class="trash-bin-spacer"></div>
+            <div  id="trash" class="mb-3"></div>
+            <div class="trash-bin-spacer"></div>
+          </div>
+          <div class="d-flex flex-column">
+              <div class="trash-bin" id="organic-bin">
+                  <img src="organiskie.jpg" alt="Organiskie atkritumi"  width="200" height="200">
+              </div>
+              <div class="trash-bin-spacer"></div>
+              <div class="trash-bin" id="glass-bin">
+                  <img src="stikls.jpg" alt="Stikls" width="200" height="200">
+              </div>
+          </div>
+      </div>
+    
 
 <script src="script.js"></script>
 <script>
