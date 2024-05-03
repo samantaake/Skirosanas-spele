@@ -12,26 +12,32 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#trash-bins {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-
 .trash-bin {
-  width: 100px;
-  height: 100px;
+  width: 250px;
+  height: 250px;
   background-color: #ccc;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-#trash {
-  width: 100px;
-  height: 100px;
-  background-color: #999;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  cursor: pointer;
+.trash-img {
+  width: 30px;
+  height: auto;
+}
+#game-container {
+  width: 80%;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.d-flex {
+  flex-wrap: wrap;
 }
 
 #score,
