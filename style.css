@@ -12,26 +12,20 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#trash-bins {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-
 .trash-bin {
-  width: 100px;
-  height: 100px;
+  width: 250px;
+  height: 250px;
   background-color: #ccc;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-#trash {
-  width: 100px;
-  height: 100px;
-  background-color: #999;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  cursor: pointer;
+.trash-img {
+  max-width: 250px;
+  max-height: 250px;
 }
 
 #score,
@@ -43,4 +37,11 @@ body {
 #restart-btn {
   display: block;
   margin: 0 auto;
+}
+
+#game-stats {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
 }
