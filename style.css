@@ -23,6 +23,17 @@ body {
   margin-bottom: 20px;
 }
 
+.trash-bin-spacer {
+  width: 250px;
+  height: 250px;
+
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .trash-img {
   max-width: 250px;
   max-height: 250px;

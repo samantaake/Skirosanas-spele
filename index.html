@@ -61,23 +61,30 @@ crossorigin="anonymous"
   <div class="d-flex justify-content-between">
       <div class="d-flex flex-column">
           <div class="trash-bin" id="paper-bin">
-              <img src="papirs.jpg" alt="Papīrs" width="250" height="250">
+              <img src="bildes/papirs.jpg" alt="Papīrs" width="250" height="250">
           </div>
+          <div class="trash-bin-spacer"></div>
           <div class="trash-bin" id="plastic-bin">
-              <img src="plastmasas.jpg" alt="Plastmasa"  width="250" height="250">
+              <img src="bildes/plastmasas.jpg" alt="Plastmasa"  width="250" height="250">
           </div>
       </div>
       <div class="d-flex flex-column">
+        <div class="trash-bin-spacer"></div>
+        <div  id="trash" class="mb-3"></div>
+        <div class="trash-bin-spacer"></div>
+      </div>
+      <div class="d-flex flex-column">
           <div class="trash-bin" id="organic-bin">
-              <img src="organiskie.jpg" alt="Organiskie atkritumi"  width="250" height="250">
+              <img src="bildes/organiskie.jpg" alt="Organiskie atkritumi"  width="250" height="250">
           </div>
+          <div class="trash-bin-spacer"></div>
           <div class="trash-bin" id="glass-bin">
-              <img src="stikls.jpg" alt="Stikls" width="250" height="250">
+              <img src="bildes/stikls.jpg" alt="Stikls" width="250" height="250">
           </div>
       </div>
   </div>
 
-  <div id="trash" class="mb-3"></div>
+  
   <div id="score">Rezultāts: <span id="score-value">0</span></div>
   <div id="highscore">Labākais rezultāts: <span id="highscore-value">0</span></div>
   <button id="restart-btn" class="btn btn-primary mt-3">Atsākt</button>
