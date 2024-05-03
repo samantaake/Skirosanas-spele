@@ -116,12 +116,27 @@ const restartBtn = document.getElementById("restart-btn");
 const messageElement = document.getElementById("message");
 
 let score = 0;
-let highscore = 0;
+let highscore = getHighscore();
 let remainingItems = 20; // Kopējais atkritumu skaits
-let errors = 0; // Pievienojiet kļūdu skaita mainīgo
 
 // Inicializē spēli
 initializeGame();
+
+// Saglabāt highscore
+function saveHighscore() {
+    localStorage.setItem('highscore', highscore);
+}
+
+// Iegūt highscore no localStorage
+function getHighscore() {
+    const storedHighscore = localStorage.getItem('highscore');
+    return storedHighscore ? parseInt(storedHighscore) : 0; // Parbaudam, vai ir saglabāts rezultāts
+}
+
+// Atjaunot highscore elementu spēles interfeisā
+function updateHighscoreElement() {
+    highscoreElement.textContent = highscore;
+}
 
 // Funkcija, lai inicializētu spēli
 function initializeGame() {
@@ -196,26 +211,21 @@ function drop(event) {
     remainingItems--;
     if (score > highscore) {
       highscore = score;
-      highscoreElement.textContent = highscore;
+      saveHighscore(); // Saglabā jauno highscore, ja tas ir pārspēts
+      updateHighscoreElement(); // Atjaunina highscore interfeisā
     }
   } else {
     showMessage("Nepareizs konteiners!");
-    errors++; // Pievienojiet kļūdu skaita palielināšanu
-    if (errors >= 3) {
-      endGame(); // Ja kļūdu skaits pārsniedz 3, izsauciet funkciju, lai beigtu spēli
-      return;
-    }
   }
   generateTrash();
 }
 
 // Funkcija, lai beigtu spēli
 function endGame() {
-  alert("Spēle beidzās! Jūsu rezultāts: " + score);
+  alert("Spēle beigusies! Jūsu rezultāts: " + score);
   score = 0;
   scoreElement.textContent = score;
   remainingItems = 20;
-  errors = 0; // Atiestata kļūdu skaitu
   generateTrash();
 }
 
@@ -234,3 +244,8 @@ function showMessage(msg) {
     messageElement.textContent = "";
   }, 5000); // Noņem ziņojumu pēc 5 sekundēm
 }
+
+// Ielādē highscore, kad dokumenta DOM ir ielādēts
+document.addEventListener('DOMContentLoaded', function() {
+    updateHighscoreElement();
+});
