@@ -1,3 +1,4 @@
+
 // Define trash items
 const trashItems = [
   {
