@@ -24,8 +24,8 @@ body {
 }
 
 .trash-img {
-  width: 30px;
-  height: auto;
+  width: 200px;
+  height: 200px;
 }
 #game-container {
   width: 80%;
