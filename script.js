@@ -13,7 +13,7 @@ const trashItems = [
   {
     name: "Kafijas vai tējas biezumi",
     category: "Organiskie atkritumi",
-    path: "bildes/atkritumi/stikli/vina pudele.jpg",
+    path: "bildes/atkritumi/bio/Kafijas biezumi.jpg",
   },
   {
     name: "Dzeramās glāzes",
