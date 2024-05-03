@@ -154,8 +154,8 @@ function generateTrash() {
     endGame();
     return;
   }
-  const randomIndex = Math.floor(Math.random() * trashItems.length);
-  const trashItem = trashItems[randomIndex];
+  const trashItem = chooseTrashItem();
+  remainingItems--; // Samazina atlikušo atkritumu skaitu
 
   // Izveido jaunu atkritumu elementu
   const newTrashElement = document.createElement("div");
@@ -215,7 +215,6 @@ function drop(event) {
   if (trashCategory === binCategory) {
     score++;
     scoreElement.textContent = score;
-    remainingItems--;
     if (score > highscore) {
       highscore = score;
       saveHighscore(); // Saglabā jauno highscore, ja tas ir pārspēts
@@ -254,3 +253,15 @@ function restartGame() {
 document.addEventListener("DOMContentLoaded", function () {
   updateHighscoreElement();
 });
+
+// Izmanto šo funkciju, lai izvēlētos un izņemtu atkritumu no saraksta
+function chooseTrashItem() {
+  if (trashItems.length === 0) {
+    endGame(); // Ja atkritumu saraksts ir tukšs, beidziet spēli
+    return;
+  }
+  const randomIndex = Math.floor(Math.random() * trashItems.length);
+  const trashItem = trashItems[randomIndex];
+  trashItems.splice(randomIndex, 1); // Izņemiet izvēlēto atkritumu no saraksta
+  return trashItem;
+}
