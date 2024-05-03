@@ -24,20 +24,8 @@ body {
 }
 
 .trash-img {
-  width: 200px;
-  height: 200px;
-}
-#game-container {
-  width: 80%;
-  margin: 50px auto;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.d-flex {
-  flex-wrap: wrap;
+  max-width: 250px;
+  max-height: 250px;
 }
 
 #score,
@@ -49,4 +37,11 @@ body {
 #restart-btn {
   display: block;
   margin: 0 auto;
+}
+
+#game-stats {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
 }
