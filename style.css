@@ -1,21 +1,20 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #game-container {
-  width: 80%;
+  width: 70%;
   margin: 50px auto;
-  background-color: #fff;
+ 
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+
 }
 
 .trash-bin {
   width: 150px;
   height: 150px;
-  background-color: #ccc;
+
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -31,6 +30,7 @@ border-radius: 10px;
   justify-content: center;
   align-items: center;
   margin-bottom: 1px;
+
 }
 
 .trash-img {
@@ -54,4 +54,16 @@ border-radius: 10px;
   margin-top: 20px;
   font-size: 18px;
   font-weight: bold;
+}
+
+#message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 24px;
+  display: none; /* Sākumā paslēpj paziņojumu */
 }
