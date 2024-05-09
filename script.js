@@ -38,7 +38,7 @@ const trashItems = [
   {
     name: "Dārza atkritumi",
     category: "Organiskie atkritumi",
-    path: "bildes/atkritumi/stikli/vina pudele.jpg",
+    path: "bildes/atkritumi/stikli/darza lapas.jpg",
   },
   {
     name: "Pārtikas mizas",
