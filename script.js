@@ -106,6 +106,7 @@ const trashItems = [
     path: "bildes/atkritumi/papirs/aploksne.jpg",
   },
 ];
+
 // Izvēlas HTML elementus
 const trashBinElements = document.querySelectorAll(".trash-bin");
 const trashElement = document.getElementById("trash");
@@ -114,6 +115,7 @@ const highscoreElement = document.getElementById("highscore-value");
 const restartBtn = document.getElementById("restart-btn");
 const messageElement = document.getElementById("message");
 const statsElement = document.getElementById("game-stats");
+const errorElement = document.getElementById("error-value"); // Pievieno kļūdu skaitītāja elementu
 
 let score = 0;
 let highscore = getHighscore();
@@ -223,6 +225,7 @@ function drop(event) {
   } else {
     event.target.style.border = "2px solid red"; // Uzstāda sarkanu robežu, ja atkritums ielikts nepareizi
     errors++; // Pievienojiet kļūdu skaita palielināšanu
+    errorElement.textContent = errors; // Atjauno kļūdu skaitītāju HTML
     if (errors >= 3) {
       endGame(); // Ja kļūdu skaits pārsniedz 3, izsauciet funkciju, lai beigtu spēli
       return;
@@ -240,7 +243,7 @@ function drop(event) {
 // Funkcija, lai beigtu spēli
 function endGame() {
   trashElement.innerHTML = "";
-  const stats = `Spēle beigusies! Jūsu rezultāts: ${score}, Highscore: ${highscore}`;
+  const stats = `Spēle beigusies! Jūsu rezultāts: ${score}, Labākais rezultāts: ${highscore}`;
   statsElement.textContent = stats;
   restartBtn.style.display = "block"; // Parāda restart pogu
 }
@@ -251,6 +254,7 @@ function restartGame() {
   scoreElement.textContent = score;
   remainingItems = 20;
   errors = 0;
+  errorElement.textContent = errors; // Atjauno kļūdu skaitītāju HTML
   generateTrash();
   statsElement.textContent = "";
   restartBtn.style.display = "none"; // Paslēpj restart pogu
