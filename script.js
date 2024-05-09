@@ -1,4 +1,3 @@
-
 // Define trash items
 const trashItems = [
   {
@@ -107,8 +106,6 @@ const trashItems = [
     path: "bildes/atkritumi/papirs/aploksne.jpg",
   },
 ];
-
-
 // Izvēlas HTML elementus
 const trashBinElements = document.querySelectorAll(".trash-bin");
 const trashElement = document.getElementById("trash");
@@ -154,6 +151,8 @@ function generateTrash() {
     endGame();
     return;
   }
+
+  // Ģenerēt atkritumu elementu un paziņot, ja spēle ir beigusies
   const trashItem = chooseTrashItem();
   remainingItems--; // Samazina atlikušo atkritumu skaitu
 
@@ -215,18 +214,26 @@ function drop(event) {
   if (trashCategory === binCategory) {
     score++;
     scoreElement.textContent = score;
+    event.target.style.border = "2px solid green"; // Uzstāda zaļu robežu, ja atkritums ielikts pareizi
     if (score > highscore) {
       highscore = score;
       saveHighscore(); // Saglabā jauno highscore, ja tas ir pārspēts
       updateHighscoreElement(); // Atjaunina highscore interfeisā
     }
   } else {
+    event.target.style.border = "2px solid red"; // Uzstāda sarkanu robežu, ja atkritums ielikts nepareizi
     errors++; // Pievienojiet kļūdu skaita palielināšanu
     if (errors >= 3) {
       endGame(); // Ja kļūdu skaits pārsniedz 3, izsauciet funkciju, lai beigtu spēli
       return;
     }
   }
+
+  // Izsauc funkciju, lai rāmja pazūdšana tiktu aizkavēta uz 3 sekundēm
+  setTimeout(() => {
+    event.target.style.border = "none";
+  }, 2000);
+
   generateTrash();
 }
 
