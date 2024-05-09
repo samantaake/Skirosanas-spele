@@ -6,11 +6,6 @@ const trashItems = [
     path: "bildes/atkritumi/stikli/vina pudele.jpg",
   },
   {
-    name: "Dārza atliekas",
-    category: "Organiskie atkritumi",
-    path: "bildes/atkritumi/bio/darza lapas.jpg",
-  },
-  {
     name: "Kafijas vai tējas biezumi",
     category: "Organiskie atkritumi",
     path: "bildes/atkritumi/bio/Kafijas biezumi.jpg",
